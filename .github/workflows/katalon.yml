@@ -30,6 +30,7 @@ jobs:
       - name: Verify Katalon Studio installation
         run: |
           export KATALON_WORKSPACE=/home/runner/work/katalonStudio-Project/katalonStudio-Project
+          Xvfb :99 -ac &
           export DISPLAY=:99
           /home/runner/work/katalonStudio-Project/katalonStudio-Project/katalon -console -version
 
