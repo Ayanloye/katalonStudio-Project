@@ -31,8 +31,9 @@ jobs:
 
       - name: Install Katalon Studio
         run: |
-           wget -q https://download.katalon.com/9.0.0/Katalon_Studio_Linux_64-9.0.0.tar.gztar -xzf Katalon_Studio_Linux_64-9.0.0.tar.gz
-            mv Katalon_Studio_Linux_64-9.0.0 Katalon_Studio_Linux_64
+          wget -q https://download.katalon.com/9.0.0/Katalon_Studio_Linux_64-9.0.0.tar.gz
+          tar -xzf Katalon_Studio_Linux_64-9.0.0.tar.gz
+          mv Katalon_Studio_Linux_64-9.0.0 Katalon_Studio_Linux_64
 
       - name: Run Katalon Tests
         run: |
