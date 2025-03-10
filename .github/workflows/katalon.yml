@@ -29,8 +29,11 @@ jobs:
 
 
       - name: Verify Katalon Studio installation
-        run: |
-          /home/runner/work/katalonStudio-Project/katalonStudio-Project/katalon -version
+        env:
+          KATALON_WORKSPACE: /home/runner/work/katalonStudio-Project/katalonStudio-Project
+          run: |
+              /home/runner/work/katalonStudio-Project/katalonStudio-Project/katalon -console -version
+
 
 
       - name: Run Katalon Studio test
