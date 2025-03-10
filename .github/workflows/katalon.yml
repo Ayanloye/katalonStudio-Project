@@ -35,9 +35,11 @@ jobs:
 
       - name: Run Katalon Studio test
         run: |
-          /home/runner/work/katalonStudio-Project/katalonStudio-Project/Katalon_Studio_Linux_64/katalonc \
-            -noSplash \
-            -runMode=console \
-            -projectPath="/home/runner/work/katalonStudio-Project/katalonStudio-Project/CrediteVile Assesment/CrediteVile Assesment.prj" \
-            -testSuitePath="Test Suites/Assessment" \
-            -browserType="Chrome"
+            /home/runner/work/katalonStudio-Project/katalonStudio-Project/katalon \
+              -noSplash \
+              -runMode=console \
+              -projectPath="/home/runner/work/katalonStudio-Project/katalonStudio-Project/CrediteVile Assesment/CrediteVile Assesment.prj" \
+              -testSuitePath="Test Suites/Assessment" \
+              -browserType="Chrome"
+
+
