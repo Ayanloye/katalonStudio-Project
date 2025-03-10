@@ -22,8 +22,11 @@ jobs:
 
       - name: Run Katalon Test
         run: |
-         xvfb-run --auto-servernum $(pwd)/Katalon_Studio_Linux_64/katalonc \
-          -noSplash -runMode=console \
-          -projectPath="$(pwd)/CrediteVile Assesment/CrediteVile Assesment.prj" \
+         ./Katalon_Studio_Linux_64/katalonc \
+          -noSplash \
+          -runMode=console \
+          -projectPath="/home/runner/work/katalonStudio-Project/katalonStudio-Project/CrediteVile Assesment/CrediteVile Assesment.prj" \
           -testSuitePath="Test Suites/Assessment" \
           -browserType="Chrome"
+
+
