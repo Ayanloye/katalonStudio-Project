@@ -18,7 +18,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y openjdk-11-jdk
           wget https://download.katalon.com/9.0.0/Katalon_Studio_Linux_64-9.0.0.tar.gz
-          tar -xzf Katalon_Studio_Linux_64-9.0.0.tar.gz
+          tar -xzf Katalon_Studio_Linux_64-9.0.0.tar.gz -C /home/runner/work/katalonStudio-Project/katalonStudio-Project/
 
       - name: Debug environment variables
         run: |
