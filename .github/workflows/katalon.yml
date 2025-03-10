@@ -21,9 +21,21 @@ jobs:
         with:
           java-version: 1.8
 
+      - name: Install Xvfb
+        run: sudo apt-get install -y xvfb
+
+      - name: Install Katalon
+        run: |
+          mkdir -p katalon
+          wget https://github.com/katalon-studio/katalon-studio/releases/download/v8.6.9/katalon-studio-linux-64.zip -O katalon-studio-linux-64.zip
+          unzip katalon-studio-linux-64.zip -d katalon
+
+      - name: Verify download
+        run: |
+          file katalon-studio-linux-64.zip
+
       - name: Run Katalon Studio
-        uses: katalon-studio/katalon-studio-github-action@v3.0
-        with:
-          version: '8.6.9'
-          projectPath: 'C:/Users/mdpas/Katalon Studio/CrediteVile Assesment'
-          args: '-noSplash -runMode=console -retry=0 -testSuitePath="Test Suites/Assessment" -executionProfile="default" -browserType="Chrome"'
+        run: |
+          Xvfb :99 -screen 0 1024x768x24 &
+          export DISPLAY=:99
+          $HOME/katalon/katalonc -noSplash -runMode=console -projectPath="C:/Users/mdpas/Katalon Studio/CrediteVile Assesment" -retry=0 -testSuitePath="Test Suites/Assessment" -executionProfile="default" -browserType="Chrome"
