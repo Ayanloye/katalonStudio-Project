@@ -21,16 +21,20 @@ jobs:
           wget -q https://download.katalon.com/9.0.0/Katalon_Studio_Linux_64-9.0.0.tar.gz
           tar -xzf Katalon_Studio_Linux_64-9.0.0.tar.gz
           mv Katalon_Studio_Linux_64-9.0.0 Katalon_Studio_Linux_64
+          chmod +x Katalon_Studio_Linux_64/katalonc  # ✅ Make katalonc executable
 
       - name: Debug:Verify Katalon Installation
         run: |
           echo "Checking installed files..."
           ls -la
+          echo "Checking Katalon directory..."
           ls -la Katalon_Studio_Linux_64 || echo "Katalon Studio NOT found!"
+          echo "Checking katalonc executable..."
+          file Katalon_Studio_Linux_64/katalonc || echo "katalonc is missing!"
 
       - name: Run Katalon Tests
         run: |
-          xvfb-run --auto-servernum Katalon_Studio_Linux_64/katalonc \
+          xvfb-run --auto-servernum ./Katalon_Studio_Linux_64/katalonc \
           -noSplash -runMode=console \
           -projectPath="$(pwd)/CrediteVile Assesment/CrediteVile Assesment.prj" \
           -testSuitePath="Test Suites/Assessment" \
