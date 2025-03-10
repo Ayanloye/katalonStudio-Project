@@ -27,12 +27,12 @@ jobs:
       - name: Install Katalon
         run: |
           mkdir -p katalon
-          wget https://github.com/katalon-studio/katalon-studio/releases/download/v8.6.9/katalon-studio-linux-64.zip -O katalon-studio-linux-64.zip
-          unzip katalon-studio-linux-64.zip -d katalon
+          wget https://download.katalon.com/8.6.9/Katalon_Studio_Engine_Linux_64-8.6.9.tar.gz -O katalon-studio-linux-64.tar.gz
+          tar -xzf katalon-studio-linux-64.tar.gz -C katalon
 
       - name: Verify download
         run: |
-          file katalon-studio-linux-64.zip
+          file katalon-studio-linux-64.tar.gz
 
       - name: Run Katalon Studio
         run: |
