@@ -18,7 +18,7 @@ jobs:
           wget -q https://download.katalon.com/9.0.0/Katalon_Studio_Linux_64-9.0.0.tar.gz
           tar -xzf Katalon_Studio_Linux_64-9.0.0.tar.gz
           mv Katalon_Studio_Linux_64-9.0.0 Katalon_Studio_Linux_64
-          chmod +x Katalon_Studio_Linux_64/katalonc
+
 
       - name: Run Katalon Test
         run: |
