@@ -30,7 +30,8 @@ jobs:
 
       - name: Verify Katalon Studio installation
         run: |
-          /home/runner/work/katalonStudio-Project/katalonStudio-Project/Katalon_Studio_Linux_64/katalonc -version
+          /home/runner/work/katalonStudio-Project/katalonStudio-Project/katalon -version
+
 
       - name: Run Katalon Studio test
         run: |
