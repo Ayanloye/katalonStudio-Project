@@ -25,6 +25,6 @@ jobs:
       - name: Run Katalon Tests
         run: |
           ./Katalon_Studio_Linux_64/katalonc \
-          -noSplash -runMode=console -projectPath="$(pwd)/C:\Users\mdpas\Katalon Studio\CrediteVile Assesment.prj" \
+          -noSplash -runMode=console -projectPath="$(pwd)/C:/Users/mdpas/Katalon Studio/CrediteVile Assesment.prj" \
           -testSuitePath="Test Suites/Assessment" \
           -browserType="Chrome"
