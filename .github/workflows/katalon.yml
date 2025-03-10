@@ -30,9 +30,13 @@ jobs:
       - name: Verify Katalon Studio installation
         run: |
           export KATALON_WORKSPACE=/home/runner/work/katalonStudio-Project/katalonStudio-Project
-          Xvfb :99 -ac &
+          echo "Starting Xvfb..."
+          Xvfb :99 -ac -timeout 60 &
+          echo "Xvfb started. Setting DISPLAY variable..."
           export DISPLAY=:99
+          echo "Running Katalon Studio..."
           /home/runner/work/katalonStudio-Project/katalonStudio-Project/katalon -console -version
+
 
       - name: Run Katalon Studio test
         run: |
