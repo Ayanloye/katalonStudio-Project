@@ -13,14 +13,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Katalon Studio
-        uses: katalon-studio/setup-katalon-studio@v1
-        with:
-          version: "9.0.0"  # Change to the latest version
+      - name: Install Dependencies
+        run: sudo apt update && sudo apt install -y default-jre xvfb unzip
+
+      - name: Download & Install Katalon Studio
+        run: |
+          wget -q https://download.katalon.com/9.0.0/Katalon_Studio_Linux_64-9.0.0.tar.gz
+          tar -xzf Katalon_Studio_Linux_64-9.0.0.tar.gz
+          mv Katalon_Studio_Linux_64-9.0.0 Katalon_Studio_Linux_64
+
+      - name: Debug:Verify Katalon Installation
+        run: |
+          echo "Checking installed files..."
+          ls -la
+          ls -la Katalon_Studio_Linux_64 || echo "Katalon Studio NOT found!"
 
       - name: Run Katalon Tests
         run: |
-          katalonc -noSplash -runMode=console \
+          xvfb-run --auto-servernum Katalon_Studio_Linux_64/katalonc \
+          -noSplash -runMode=console \
           -projectPath="$(pwd)/CrediteVile Assesment/CrediteVile Assesment.prj" \
           -testSuitePath="Test Suites/Assessment" \
           -browserType="Chrome"
