@@ -16,21 +16,20 @@ jobs:
       - name: Install Dependencies
         run: sudo apt update && sudo apt install -y default-jre xvfb unzip wget
 
-      - name: Download Latest Katalon Studio
+      - name: Download & Install Katalon Studio
         run: |
-          wget -q --show-progress --progress=bar:force:noscroll "https://github.com/katalon-studio/katalon-studio/releases/download/v10.1.0/Katalon_Studio_Engine_Linux_64-10.1.0.tar.gz"
-          tar -xzf Katalon_Studio_Linux_64.tar.gz
-          ls -la  # Debugging step to check extracted files
+          wget -q --show-progress --progress=bar:force:noscroll "https://github.com/katalon-studio/katalon-studio/releases/latest/download/Katalon_Studio_Linux_64.tar.gz"
+          tar -xzf Katalon_Studio_Linux_64.tar.gz || { echo "❌ Extraction failed!"; exit 1; }
+          mv Katalon_* Katalon_Studio_Linux_64 || { echo "❌ Renaming failed!"; exit 1; }
 
       - name: Debug:Verify Katalon Installation
         run: |
-          echo "Checking installed files..."
+          echo "✅ Checking installed files..."
           ls -la
-          echo "Checking Katalon directory..."
-          ls -la Katalon_Studio_Linux_64 || echo "❌ Katalon Studio NOT found!"
-          echo "Checking katalonc executable..."
-          file Katalon_Studio_Linux_64/katalonc || echo "❌ katalonc is missing!"
-          chmod +x Katalon_Studio_Linux_64/katalonc || echo "❌ Failed to make katalonc executable!"
+          echo "✅ Checking Katalon directory..."
+          ls -la Katalon_Studio_Linux_64 || { echo "❌ Katalon Studio folder NOT found!"; exit 1; }
+          echo "✅ Checking katalonc executable..."
+          test -f Katalon_Studio_Linux_64/katalonc && chmod +x Katalon_Studio_Linux_64/katalonc || { echo "❌ katalonc not found!"; exit 1; }
 
       - name: Run Katalon Tests
         run: |
