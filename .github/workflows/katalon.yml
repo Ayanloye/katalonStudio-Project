@@ -20,12 +20,15 @@ jobs:
           wget https://download.katalon.com/9.0.0/Katalon_Studio_Linux_64-9.0.0.tar.gz
           tar -xzf Katalon_Studio_Linux_64-9.0.0.tar.gz -C /home/runner/work/katalonStudio-Project/katalonStudio-Project/
 
+
       - name: Debug environment variables
         run: |
-          echo "PATH: $PATH"
-          echo "JAVA_HOME: $JAVA_HOME"
-          ls -l /home/runner/work/katalonStudio-Project/katalonStudio-Project/Katalon_Studio_Linux_64/katalonc
-      
+            echo "PATH: $PATH"
+            echo "JAVA_HOME: $JAVA_HOME"
+            ls -l /home/runner/work/katalonStudio-Project/katalonStudio-Project/
+            ls -l /home/runner/work/katalonStudio-Project/katalonStudio-Project/Katalon_Studio_Linux_64/katalonc
+
+
       - name: Verify Katalon Studio installation
         run: |
           /home/runner/work/katalonStudio-Project/katalonStudio-Project/Katalon_Studio_Linux_64/katalonc -version
