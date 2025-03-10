@@ -1,39 +1,28 @@
-name: Katalon Test Execution
+name: Katalon Automation
 
 on:
-  push:
+  push:  # This runs the workflow when you push changes
     branches:
       - main
+  workflow_dispatch:  # ✅ This allows manual triggering
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        run: sudo apt update && sudo apt install -y default-jre xvfb unzip wget
-
-      - name: Download & Install Katalon Studio
+      - name: Set Up Katalon
         run: |
-          wget -q --show-progress --progress=bar:force:noscroll "https://github.com/katalon-studio/katalon-studio/releases/latest/download/Katalon_Studio_Linux_64.tar.gz"
-          tar -xzf Katalon_Studio_Linux_64.tar.gz || { echo "❌ Extraction failed!"; exit 1; }
-          mv Katalon_* Katalon_Studio_Linux_64 || { echo "❌ Renaming failed!"; exit 1; }
+          wget -q https://download.katalon.com/9.0.0/Katalon_Studio_Linux_64-9.0.0.tar.gz
+          tar -xzf Katalon_Studio_Linux_64-9.0.0.tar.gz
+          mv Katalon_Studio_Linux_64-9.0.0 Katalon_Studio_Linux_64
+          chmod +x Katalon_Studio_Linux_64/katalonc
 
-      - name: Debug:Verify Katalon Installation
+      - name: Run Katalon Test
         run: |
-          echo "✅ Checking installed files..."
-          ls -la
-          echo "✅ Checking Katalon directory..."
-          ls -la Katalon_Studio_Linux_64 || { echo "❌ Katalon Studio folder NOT found!"; exit 1; }
-          echo "✅ Checking katalonc executable..."
-          test -f Katalon_Studio_Linux_64/katalonc && chmod +x Katalon_Studio_Linux_64/katalonc || { echo "❌ katalonc not found!"; exit 1; }
-
-      - name: Run Katalon Tests
-        run: |
-          xvfb-run --auto-servernum ./Katalon_Studio_Linux_64/katalonc \
+          xvfb-run --auto-servernum Katalon_Studio_Linux_64/katalonc \
           -noSplash -runMode=console \
           -projectPath="$(pwd)/CrediteVile Assesment/CrediteVile Assesment.prj" \
           -testSuitePath="Test Suites/Assessment" \
