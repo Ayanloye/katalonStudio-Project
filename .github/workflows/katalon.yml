@@ -22,7 +22,7 @@ jobs:
 
       - name: Run Katalon Test
         run: |
-         ./Katalon_Studio_Linux_64/katalonc \
+         /home/runner/work/katalonStudio-Project/katalonStudio-Project/Katalon_Studio_Linux_64/katalonc \
           -noSplash \
           -runMode=console \
           -projectPath="/home/runner/work/katalonStudio-Project/katalonStudio-Project/CrediteVile Assesment/CrediteVile Assesment.prj" \
