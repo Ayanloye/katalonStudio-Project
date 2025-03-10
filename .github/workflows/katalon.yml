@@ -27,11 +27,6 @@ jobs:
           echo "JAVA_HOME: $JAVA_HOME"
           ls -l /home/runner/work/katalonStudio-Project/katalonStudio-Project/
 
-      - name: Verify Katalon Studio installation
-        run: |
-          export KATALON_WORKSPACE=/home/runner/work/katalonStudio-Project/katalonStudio-Project
-          /home/runner/work/katalonStudio-Project/katalonStudio-Project/katalon -console -version
-
       - name: Run Katalon Studio test
         run: |
           /home/runner/work/katalonStudio-Project/katalonStudio-Project/katalon \
