@@ -1,33 +1,40 @@
-name: Katalon Automation
+name: Katalon Studio Test
 
 on:
-  push:  # This runs the workflow when you push changes
+  push:
     branches:
       - main
-  workflow_dispatch:  # ✅ This allows manual triggering
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Set Up Katalon
+      - name: Install dependencies
         run: |
-          wget -q https://download.katalon.com/9.0.0/Katalon_Studio_Linux_64-9.0.0.tar.gz
+          # Install Java and Katalon Studio dependencies
+          sudo apt-get update
+          sudo apt-get install -y openjdk-11-jdk
+          wget https://download.katalon.com/9.0.0/Katalon_Studio_Linux_64-9.0.0.tar.gz
           tar -xzf Katalon_Studio_Linux_64-9.0.0.tar.gz
-          mv Katalon_Studio_Linux_64-9.0.0 Katalon_Studio_Linux_64
 
-
-      - name: Run Katalon Test
+      - name: Debug environment variables
         run: |
-         /home/runner/work/katalonStudio-Project/katalonStudio-Project/Katalon_Studio_Linux_64/katalonc \
-          -noSplash \
-          -runMode=console \
-          -projectPath="/home/runner/work/katalonStudio-Project/katalonStudio-Project/CrediteVile Assesment/CrediteVile Assesment.prj" \
-          -testSuitePath="Test Suites/Assessment" \
-          -browserType="Chrome"
+          echo "PATH: $PATH"
+          echo "JAVA_HOME: $JAVA_HOME"
+          ls -l /home/runner/work/katalonStudio-Project/katalonStudio-Project/Katalon_Studio_Linux_64/katalonc
+      
+      - name: Verify Katalon Studio installation
+        run: |
+          /home/runner/work/katalonStudio-Project/katalonStudio-Project/Katalon_Studio_Linux_64/katalonc -version
 
-
-
+      - name: Run Katalon Studio test
+        run: |
+          /home/runner/work/katalonStudio-Project/katalonStudio-Project/Katalon_Studio_Linux_64/katalonc \
+            -noSplash \
+            -runMode=console \
+            -projectPath="/home/runner/work/katalonStudio-Project/katalonStudio-Project/CrediteVile Assesment/CrediteVile Assesment.prj" \
+            -testSuitePath="Test Suites/Assessment" \
+            -browserType="Chrome"
