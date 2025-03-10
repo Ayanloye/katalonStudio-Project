@@ -31,11 +31,13 @@ jobs:
         run: |
           export KATALON_WORKSPACE=/home/runner/work/katalonStudio-Project/katalonStudio-Project
           echo "Starting Xvfb..."
-          Xvfb :99 -ac -timeout 60 &
+          timeout 60s Xvfb :99 -ac &
           echo "Xvfb started. Setting DISPLAY variable..."
           export DISPLAY=:99
           echo "Running Katalon Studio..."
           /home/runner/work/katalonStudio-Project/katalonStudio-Project/katalon -console -version
+
+
 
 
       - name: Run Katalon Studio test
