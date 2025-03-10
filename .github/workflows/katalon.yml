@@ -1,0 +1,26 @@
+name: Run Katalon Test
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  katalon-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Katalon Studio
+        run: |
+          wget https://github.com/katalon-studio/katalon-studio/releases/latest/download/Katalon_Studio_Linux_64.tar.gz
+          tar -xzf Katalon_Studio_Linux_64.tar.gz
+
+      - name: Run Katalon Tests
+        run: |
+          ./Katalon_Studio_Linux_64/katalonc \
+          -noSplash -runMode=console -projectPath="$(pwd)/C:\Users\mdpas\Katalon Studio\CrediteVile Assesment.prj" \
+          -testSuitePath="Test Suites/Assessment" \
+          -browserType="Chrome"
