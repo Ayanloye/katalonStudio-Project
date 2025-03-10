@@ -34,9 +34,9 @@ jobs:
           timeout 60s Xvfb :99 -ac &
           echo "Xvfb started. Setting DISPLAY variable..."
           export DISPLAY=:99
+          export GTK_PATH=
           echo "Running Katalon Studio..."
           /home/runner/work/katalonStudio-Project/katalonStudio-Project/katalon -console -version
-
 
 
 
